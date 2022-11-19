@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task WB</title>
+  </head>
+  <body>
+    <header class="header container">
+      <div class="header__logo">
+        <object data="./assets/img/ease.svg" type="image/svg+xml"></object>
+      </div>
+      <nav class="header__menu">
+        <ul class="header__menu__items">
+          <li class="header__menu__item"><a href="">Collections</a></li>
+          <li class="header__menu__item"><a href="">Blog</a></li>
+          <li class="header__menu__item"><a href="">About</a></li>
+          <li class="header__menu__item"><a href="">Contacts</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="content container">
+      <section class="section-left">
+        <article class="section-left__desc">
+          <p>
+            Collection of lighting is inspired by the geometric works of the great Suprematist
+            artists Kissitzky and Kazimir Malevich.<br /><br />Suprematism is a modernist movement
+            in the art of the early twentieth century, focused on the basic geometric forms, such as
+            circles, squares, lines and rectangles. The geometric structure of the lamps will always
+            look like a small art objects in your house.
+          </p>
+        </article>
+        <div id="desc__block" class="section-left__line">
+          <div class="section-left__ellipse"></div>
+          <div class="model__desc">
+            <ul class="model__desc__items">
+              <li class="model__desc__item">Material: <span id="material"></span></li>
+              <li class="model__desc__item">Dimensions (cm): <span id="dimensions"></span></li>
+              <li class="model__desc__item">Net Weight: <span id="weight"></span></li>
+              <li class="model__desc__item">
+                Electrification: <br /><span id="electrification">LED 10W | G9 | 220-240V | 50 Hz</span>
+              </li>
+            </ul>
+          </div>
+          <div class="select-model">
+            <div class="select-model__items">
+              <div id="model__first" class="select-model__item select-model__item_active"></div>
+              <div id="model__second" class="select-model__item"></div>
+              <div id="model__third" class="select-model__item"></div>
+            </div>
+            <div class="select-model__switch">
+              <div class="select-model__switch__light">
+                <object data="./assets/img/icon_sun.svg" type="image/svg+xml"></object>
+              </div>
+              <div class="select-model__switch__dark">
+                <object data="./assets/img/icon_moon.svg" type="image/svg+xml"></object>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="design__block" class="section-right"></section>
+    </div>
+  </body>
 </html>

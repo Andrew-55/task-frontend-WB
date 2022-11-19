@@ -1,3 +1,224 @@
 @import './libs/normalize.css';
+@import './style/fonts';
 
+$header-color: #3d9090;
+$bg-body: #dbeeee;
+$black: #000000;
+$white: #ffffffff;
+$white50: #ffffff80;
+$white25: #ffffff40;
+$line-color: #c4c4c4;
+$bg-ellipse: #e4d7b9;
+$bg-select-model: #bddddd;
+$bg-btn-light: #fff3da;
+$bg-btn-dark: #94a6a6;
 
+body * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  font-family: 'SF Compact Display', sans-serif;
+  background-color: $bg-body;
+}
+
+a {
+  color: initial;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+
+.container {
+  max-width: 1600px;
+  padding: 0 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  margin-top: 27px;
+  margin-bottom: 8px;
+  &__logo {
+    width: 219px;
+    height: 45px;
+    padding-top: 3px;
+  }
+  &__menu {
+    display: flex;
+    &__items {
+      display: flex;
+      column-gap: 48px;
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+      line-height: 133.84%;
+      & a {
+        color: $header-color;
+      }
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 867px;
+  margin-bottom: 30px;
+}
+.section-left {
+  position: relative;
+  &__desc {
+    width: 599px;
+    height: 299px;
+    margin-top: 84px;
+    margin-left: 6px;
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 32px;
+    letter-spacing: 0.055em;
+    color: $black;
+  }
+  &__line {
+    position: absolute;
+    top: 455px;
+    left: -30px;
+    width: 703px;
+    height: 661px;
+    border-top: 1px solid $line-color;
+
+    & > img {
+      position: absolute;
+      left: 42%;
+    }
+  }
+  &__ellipse {
+    width: 462px;
+    height: 450px;
+    border-radius: 400px;
+    background-color: $bg-ellipse;
+    position: absolute;
+    top: 25px;
+    left: -57px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+  }
+}
+.select-model {
+  position: absolute;
+  top: 41px;
+  right: 0px;
+  width: 167px;
+  height: 554px;
+  border-radius: 18px 0 0 18px;
+  background-color: $bg-select-model;
+  overflow: hidden;
+  &__items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 17px;
+  }
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+    width: 133px;
+    height: 131px;
+    border-radius: 14px;
+    & img {
+      width: auto;
+      height: 95%;
+    }
+    &:hover {
+      background-color: $white25;
+    }
+
+    &_active {
+      background-color: $white50;
+    }
+  }
+  &__switch {
+    width: 100%;
+    height: 76px;
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &__light,
+    &__dark {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & object {
+        pointer-events: none;
+        width: 33px;
+        height: 32px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    }
+    &__light {
+      background-color: $bg-btn-light;
+    }
+    &__dark {
+      background-color: $bg-btn-dark;
+    }
+  }
+}
+
+.model__desc {
+  position: absolute;
+  top: 158px;
+  left: 39px;
+  width: 327px;
+  height: 185px;
+  &__items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 21px;
+    color: $black;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 133.84%;
+    letter-spacing: 0.055em;
+    & span {
+      font-weight: 100;      
+    }
+  
+  }
+}
+
+#material {
+  display: inline-block;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.section-right {
+  position: relative;
+  width: 867px;
+  height: 1087px;
+  background: url('./assets/img/IMG_1.png');
+  border-radius: 17px;
+  border-top: 1px solid $black;
+  border-right: 1px solid $black;
+  border-left: 1px solid $line-color;
+  border-bottom: 1px solid $line-color;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  & > img {
+    position: absolute;
+    left: 25%;
+    height: 360px;
+    width: auto;
+
+  }
+}
