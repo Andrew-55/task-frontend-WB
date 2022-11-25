@@ -1,46 +1,63 @@
 import './index.html';
 import './index.scss';
+import {
+  getLamps,
+  addDescModel,
+  changeImageBlock,
+  removeSkeletonImg,
+  addItems,
+  checkDarkMode,
+  addClassBlock,
+  removeClassBlock,
+  addOnclickAllItemsBlock,
+} from './modules/functions';
 
 const url = 'https://private-anon-47dcf56d44-lampshop.apiary-mock.com/lamps';
-let startModel = 0;
+let activeModel = 0;
+let stateLamps = [];
+const descBlock = document.getElementById('desc__block');
+const designBlock = document.getElementById('design__block');
+const selectBloks = document.getElementsByClassName('select-model__item');
+const modelItems = document.getElementById('model__items');
+const switchDark = document.getElementById('switch__dark');
+const switchLight = document.getElementById('switch__light');
 
-const getLamps = async () => {
-  try {
-    let response = await fetch(url);
-    let array = await response.json();
-    return array;
-  } catch (error) {
-    alert('Sorry, the server is unavailable :(\nTry again later.');
+switchDark.onclick = () => {
+  if (stateLamps[activeModel].isDarkMode) {
+    addClassBlock(designBlock, 'dark-mode');
   }
 };
-
-const addImageBlock = (block, imageUrl) => {
-  const image = document.createElement('img');
-  image.src = `${imageUrl}`;
-  block.appendChild(image);
-};
-const addDescModel = (obj) => {
-  document.getElementById('material').innerHTML = obj.material;
-  document.getElementById(
-    'dimensions',
-  ).innerHTML = `H ${obj.height} x W ${obj.width} x D ${obj.width}`;
-  document.getElementById('weight').innerHTML = `${obj.weight} kg`;
-  document.getElementById('electrification').innerHTML = obj.electrification;
+switchLight.onclick = () => {
+  removeClassBlock(designBlock, 'dark-mode');
 };
 
+getLamps(url).then((data) => {
+  stateLamps = [...data];
 
-getLamps().then((data) => {
-  addDescModel(data[startModel]);
+  removeSkeletonImg(modelItems);
+  addDescModel(data[activeModel]);
+  addItems(data, modelItems);
+  checkDarkMode(selectBloks[activeModel], switchDark);
+  addClassBlock(selectBloks[activeModel], 'active');
 
-  const selectBloks = document.getElementsByClassName('select-model__item');
-  for (let i = 0; i < selectBloks.length; i++) {
-    addImageBlock(selectBloks[i], data[i].image);
-  };
+  Array.from(selectBloks).forEach((elem, index) => {
+    elem.onclick = () => {
+      document.querySelector('.select-model__item.active')?.classList.remove('active');
+      addClassBlock(elem, 'active');
+      addDescModel(stateLamps[index]);
+      changeImageBlock(descBlock, stateLamps[index].image, stateLamps[index].id);
+      changeImageBlock(designBlock, stateLamps[index].image, stateLamps[index].id);
+      activeModel = index;
+      if (!stateLamps[activeModel].isDarkMode) {
+        removeClassBlock(designBlock, 'dark-mode');
+        addClassBlock(switchDark, 'disable-btn');
+      }
+      if (stateLamps[activeModel].isDarkMode) {
+        removeClassBlock(switchDark, 'disable-btn');
+      }
+    };
+  });
 
-  const descBlock = document.getElementById("desc__block");
-  addImageBlock(descBlock, data[startModel].image);
-
-  const designBlock = document.getElementById("design__block");
-  addImageBlock(designBlock, data[startModel].image);
-
+  changeImageBlock(descBlock, data[activeModel].image, data[activeModel].id);
+  changeImageBlock(designBlock, data[activeModel].image, data[activeModel].id);
 });

@@ -2,7 +2,8 @@
 @import './style/fonts';
 
 $header-color: #3d9090;
-$bg-body: #dbeeee;
+$bg-body: #e5e5e5;
+$bg-container: #dbeeee;
 $black: #000000;
 $white: #ffffffff;
 $white50: #ffffff80;
@@ -22,7 +23,7 @@ body * {
 
 body {
   font-family: 'SF Compact Display', sans-serif;
-  background-color: $bg-body;
+  background-color: #e5e5e5;
 }
 
 a {
@@ -34,8 +35,11 @@ li {
 }
 
 .container {
-  max-width: 1600px;
+  min-width: 1600px;
+  margin: 0 auto;
   padding: 0 30px;
+  overflow: hidden;
+  background-color: $bg-container;
 }
 
 .header {
@@ -74,27 +78,30 @@ li {
 .section-left {
   position: relative;
   &__desc {
-    width: 599px;
-    height: 299px;
+    min-width: 599px;
+    height: 320px;
     margin-top: 84px;
     margin-left: 6px;
+    margin-right: 10px;
     font-size: 24px;
     font-weight: 100;
     line-height: 32px;
     letter-spacing: 0.055em;
     color: $black;
+    overflow-y: auto;
   }
   &__line {
     position: absolute;
     top: 455px;
     left: -30px;
-    width: 703px;
+    width: 100%;
     height: 661px;
-    border-top: 1px solid $line-color;
 
-    & > img {
+    & .image-changet {
       position: absolute;
-      left: 42%;
+      max-width: 30%;
+      height: auto;
+      left: 45%;
     }
   }
   &__ellipse {
@@ -111,23 +118,27 @@ li {
 .select-model {
   position: absolute;
   top: 41px;
-  right: 0px;
+  right: -30px;
   width: 167px;
   height: 554px;
+  padding-top: 17px;
   border-radius: 18px 0 0 18px;
   background-color: $bg-select-model;
   overflow: hidden;
   &__items {
+    height: 440px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    padding: 17px;
+    padding-left: 17px;
+    overflow-y: auto;
   }
   &__item {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     cursor: pointer;
+    user-select: none;
     width: 133px;
     height: 131px;
     border-radius: 14px;
@@ -137,10 +148,6 @@ li {
     }
     &:hover {
       background-color: $white25;
-    }
-
-    &_active {
-      background-color: $white50;
     }
   }
   &__switch {
@@ -157,6 +164,13 @@ li {
       display: flex;
       justify-content: center;
       align-items: center;
+      user-select: none;
+      &:hover {
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.8) inset;
+      }
+      &:active {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.8) inset;
+      }
       & object {
         pointer-events: none;
         width: 33px;
@@ -166,6 +180,7 @@ li {
     }
     &__light {
       background-color: $bg-btn-light;
+      border-bottom-left-radius: 18px;
     }
     &__dark {
       background-color: $bg-btn-dark;
@@ -189,9 +204,8 @@ li {
     line-height: 133.84%;
     letter-spacing: 0.055em;
     & span {
-      font-weight: 100;      
+      font-weight: 100;
     }
-  
   }
 }
 
@@ -206,19 +220,81 @@ li {
   position: relative;
   width: 867px;
   height: 1087px;
-  background: url('./assets/img/IMG_1.png');
-  border-radius: 17px;
-  border-top: 1px solid $black;
-  border-right: 1px solid $black;
-  border-left: 1px solid $line-color;
-  border-bottom: 1px solid $line-color;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: url('./assets/img/img_1.png');
+  border-radius: 15px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.8));
+  overflow: hidden;
 
-  & > img {
+  & .image-changet {
     position: absolute;
     left: 25%;
     height: 360px;
     width: auto;
+    &_short {
+      height: 324px;
+      top: -107px;
+      left: 24.2%;
+    }
+  }
+}
 
+//elements
+.active {
+  background-color: $white50;
+}
+.line {
+  height: 2px;
+  width: 150%;
+  background-color: $line-color;
+}
+.dark-mode {
+  background: url('./assets/img/img_2_dark.png');
+  & .image-changet {
+    display: none;
+  }
+}
+.skeleton {
+  width: 133px;
+  height: 131px;
+  border-radius: 14px;
+  background: rgb(236, 242, 244);
+  animation: hue 3s infinite linear;
+  transform: translate3d(0, 0, 0);
+}
+.disable-btn {
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.hue {
+  animation: hue 3s infinite linear;
+}
+@keyframes hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(-360deg);
+  }
+}
+
+.scrolling {
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: $white50;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    height: 6px;
+    background-color: $bg-btn-dark;
+    border-radius: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
   }
 }
